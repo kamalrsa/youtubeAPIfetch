@@ -1,64 +1,100 @@
+//getElementById()
+const title = document.getElementById("main-heading");
+console.log(title);
+title.style.fontSize = "22px";
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel ="stylesheet" href ="style.css">
-</head>
-<body>
-    <div class='container'>
-        <h1 id='main-heading'>Favourite Movie Franchise</h1>
-        <ul>
-            <li class='list-items'>The Matrix</li>
-            <li class='list-items'>Star Wars</li>
-            <li class='list-items'>Harry Potter</li>
-            <li class='list-items'>Marvel</li>
-        </ul>
-        
-    </div>
-    <div class='containerNext'>
-        <h1 id='main-heading'>Favourite Book</h1>
-        <ul>
-            <li class='list-items'>The Story</li>
-            <li class='list-items'>Star Wars</li>
-            <li class='list-items'>Huge</li>
-            <li class='list-items'>Putin</li>
-        </ul>
-        
-    </div>
-    <div class="eventContainer">
-        <h1 id = "main-heading">Event Listener</h1>
-        <div class="box1">
-            <h1 id="heading">Example 1</h1>
-            <button id="btn1" onclick="alert('Learn JavaScript')">Enter</button>
-        </div>
-        <div class="box2">
-            <h1 id='heading'>Example 2</h1>
-            <button id="btn2" >Enter</button>
-        </div>
-        <div class="box3">
-            <h1 id="heading">Example 3</h1>
-            <button id="btn3" >Enter</button>
-        </div>
+//getelementByClassName()
+let listItem = document.getElementsByClassName("list-items");
+console.log(listItem);
+
+//getElementByTagName()
+
+let listItemTag = document.getElementsByTagName("li");
+console.log(listItemTag);
+
+//querySelectorAll() select the Items inside the div  nodeList
+let listItems = document.querySelectorAll("div.container ul li");
+console.log(listItems);
+listItems.forEach((e) => {
+  e.style.backgroundColor = "yellow";
+});
+
+//border in first item of list
+listItemTag[0].style.border = "1px solid green";
+
+//inside the div ul added one exta element li
+const ul1 = document.querySelectorAll("div.container ul"); // select div with className .container
+const ul = document.querySelectorAll("div ul"); // select all divs
+const ul2 = document.querySelector("div ul"); //select first div ul
+console.log(ul);
+console.log(ul1);
+console.log(ul2);
+
+ul.forEach((e) => {
+  const li = document.createElement("li");
+  li.innerText = "Sponser";
+  e.append(li);
+  li.classList.add("list-items");
+  li.setAttribute("id", "main-heading");
+});
+
+//modify Attributes and classes
+let li = document.querySelector("div.containerNext ul li");
+console.log(li);
+li.setAttribute("class", "demoClass");
+li.setAttribute("id", "main-heading");
+li.classList.contains("list-items");
+console.log(li);
+
+//parent node Traversal
+console.log(li.parentNode.parentNode);
+console.log(ul2.parentNode);
+
+//childnodes
+
+console.log(ul2.childNodes);
+
+//Event Listeners
+//Click
+document.getElementById("btn2").addEventListener("click", function(e){
+  alert("I also love Javascript");
+})
+
+//mouseover 
+let box3 = document.querySelector(".box3")
+box3.addEventListener("mouseover", (e=>{
+  box3.style.backgroundColor = "red";
+}))
 
 
-    </div>
-    <div  class='jobTopCont'>
-                        
-        <input type="text" class="freeTextSearch" placeholder="Find job. fx. Stilling, by eller virksomhed">
-    </div>
-    <div class="content">
-        <button class="readMoreBtn">Read More</button>
-        <div class="readMoreText">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus voluptatibus repudiandae enim culpa nisi fuga, pariatur aliquam velit molestias debitis sed saepe, nobis distinctio voluptates, autem obcaecati! Iste, dolores eum.
-        </div>
-    </div>
+//select input box input the value and redirect to the page
+let input = document.querySelector(".freeTextSearch");
+input.addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
+    let value = e.target.value;
+    console.log(value);
+    href = "jobs?freesearch=" + value;
+    console.log(href);
+    windows.location.href = href;
+    
+  }
+});
 
 
+// hide and show more text when click in button
+const readMoreBtn = document.querySelector(".readMoreBtn");
+const readMoreText = document.querySelector(".readMoreText");
 
-</body>
-<script src="app.js"></script>
-</html>
+function revealContent(){
+
+  if(readMoreText.classList.contains('readMoreText')){
+    readMoreText.classList.remove("readMoreText")
+    readMoreBtn.innerHTML = "Hide Text";
+  }else{
+    readMoreText.classList.add("readMoreText")
+    readMoreBtn.innerHTML = "Read More";
+  }
+}
+readMoreBtn.addEventListener("click", revealContent);
+
+//Event Probagation
