@@ -79,7 +79,7 @@
     margin-bottom:20px;
    }
   .video-container .video-list .vid:hover{
-  
+  color:red;
     
   }
   .video-container .video-list .vid.active{
