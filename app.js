@@ -97,4 +97,20 @@ function revealContent(){
 }
 readMoreBtn.addEventListener("click", revealContent);
 
-//Event Probagation
+//Event Delegation
+document.querySelector("#sports").addEventListener("click", (e=>{
+  console.log(e.target.getAttribute('id')+' ' + 'is clicked');
+  target = e.target;
+  if(target.matches('li')){
+    target.style.backgroundColor ="green";
+  }
+ 
+}))
+
+// added a new sport ist with attribute
+
+let sports = document.querySelector("#sports");
+let newSport = document.createElement('li');
+newSport.innerText = "Cricket";
+newSport.getAttribute('id', 'cricket');
+sports.appendChild(newSport);
